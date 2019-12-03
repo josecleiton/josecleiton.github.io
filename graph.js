@@ -80,7 +80,6 @@ class Graph {
         };
         const findPathES6 = src => {
           // equivalente a função findPath, porém com elementos especificos do Javascript
-          console.log(src, visited);
           if (src === visited[src]) {
             return [src];
           }
