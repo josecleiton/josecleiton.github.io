@@ -48,12 +48,52 @@ class Graph {
   }
   bfs(source, target) {
     const queue = [source];
-    const visited = {source: true};
+    const visited = {};
+    visited[source] = true;
     while (queue.length) {
+      console.log('visited arr', visited);
       if (queue[0] === target) return true;
       for (let i = 0; i < this.matrix[queue[0]].length; i++) {
         if (this.matrix[queue[0]][i] && !visited[i]) {
           queue.push(i);
+          visited[i] = true;
+        }
+      }
+      queue.shift();
+    }
+    return false;
+  }
+  bfsTracert(initial, target) {
+    const queue = [initial];
+    const visited = {};
+    visited[initial] = initial;
+    while (queue.length) {
+      // console.log('visited', visited);
+      if (queue[0] === target) {
+        const findPath = (src, visited, arr = []) => {
+          if (src === visited[src]) {
+            arr.push(src);
+            return arr;
+          }
+          findPath(visited[src], visited, arr).push(src);
+          return arr;
+        };
+        const findPathES6 = src => {
+          // equivalente a função findPath, porém com elementos especificos do Javascript
+          console.log(src, visited);
+          if (src === visited[src]) {
+            return [src];
+          }
+          return [...findPathES6(visited[src]), src];
+        };
+        // const resultedPath = findPath(queue[0], visited);
+        const resultedPath = findPathES6(queue[0]);
+        return console.log(resultedPath);
+      }
+      for (let i = 0; i < this.matrix[queue[0]].length; i++) {
+        if (this.matrix[queue[0]][i] && !visited[i]) {
+          queue.push(i);
+          visited[i] = queue[0];
         }
       }
       queue.shift();
@@ -78,4 +118,5 @@ let active = null;
 // console.log(obj.toMerlin(4));
 // console.log(obj.rounds);
 // console.log(obj.matrix);
+// console.log(obj.list);
 // console.log(obj.list);
