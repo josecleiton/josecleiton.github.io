@@ -70,14 +70,6 @@ class Graph {
     while (queue.length) {
       // console.log('visited', visited);
       if (queue[0] === target) {
-        const findPath = (src, visited, arr = []) => {
-          if (src === visited[src]) {
-            arr.push(src);
-            return arr;
-          }
-          findPath(visited[src], visited, arr).push(src);
-          return arr;
-        };
         const findPathES6 = src => {
           // equivalente a função findPath, porém com elementos especificos do Javascript
           if (src === visited[src]) {
